@@ -22,8 +22,8 @@ class CreateRecordsTable extends Migration
             $table->string('phone')->nullable();
             $table->float('lat')->nullable();
             $table->float('lng')->nullable();
-            $table->float('birthdate')->nullable();
-            $table->float('gender')->nullable();
+            $table->date('birthdate')->nullable();
+            $table->string('gender')->nullable();
             $table->timestamps();
         });
     }
