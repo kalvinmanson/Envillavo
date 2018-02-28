@@ -1,0 +1,44 @@
+<template>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="panel panel-default">
+                    <div class="panel-footer">
+                        <form @submit.prevent.keyup="sent">
+                            <div class="form-group">
+                                <input type="text" class="form-control" v-model="message.chat">
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class=" btn btn-primary">Enviar mensaje</button>
+                            </div>
+                        </form>
+
+                        <input v-model="message.record">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+    export default {
+        props:['record'],
+        data() {
+            return {
+                message: {
+                    chat: '',
+                    record: this.record
+                }
+            }
+        },
+        methods: {
+            sent () {
+                this.$emit('messagesent', this.message)
+                this.message = {
+                  record: this.record
+                }
+            }
+        }
+    }
+</script>

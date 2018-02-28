@@ -6,10 +6,11 @@ use Auth;
 
 use Illuminate\Http\Request;
 
-class ContactController extends Controller
+class StoreController extends Controller
 {
     public function show($slug)
     {
-        return view('stores.show');
+      $store = Store::where('slug', $slug)->first();
+      return view('stores.show', compact('store'));
     }
 }

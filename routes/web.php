@@ -37,10 +37,13 @@ Route::get('/admin', function() {
 
 Route::get('/', 'WebController@index');
 
-Route::post('/contact', 'ContactController@store');
 //mis rutas
 Route::get('cat/{category}/{slug}', 'WebController@page')->where('category', '[a-z,0-9-]+')->where('slug', '[a-z,0-9-]+');
 Route::get('cat/{slug}', 'WebController@category')->where('slug', '[a-z,0-9-]+');
+
+//chat
+Route::get('/chats/{record_id}/{last}', 'ChatController@fetch')->where('record_id', '[0-9]+')->where('last', '[0-9]+');
+Route::post('/chats/{record_id}', 'ChatController@send')->where('record_id', '[0-9]+');
 
 //Stores y landings
 Route::get('{store}/{slug}', 'LandingController@show')->where('store', '[a-z,0-9-]+')->where('slug', '[a-z,0-9-]+');
