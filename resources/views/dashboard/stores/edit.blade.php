@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="container">
     <h1>Editar: {{ $store->name }}</h1>
     <form method="POST" action="{{ url('dashboard/stores/' . $store->id) }}" enctype="multipart/form-data">
     <div class="row">
@@ -64,15 +65,15 @@
             </div>
           </div>
           <div class="form-group">
-              <label for="description">Description</label>
+              <label for="description">Description corta</label>
               <textarea class="form-control" id="description" name="description" placeholder="Describe your category">{{ old('description') ? old('description') : $store->description }}</textarea>
           </div>
           <div class="form-group">
-              <label for="content">Content</label>
+              <label for="content">Descripcion completa de tu comercio</label>
               <textarea name="content" id="content" class="form-control editor">{{ old('content') ? old('content') : $store->content }}</textarea>
           </div>
           <div class="form-group">
-              <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Save</button>
+              <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Guardar cambios</button>
           </div>
       </div>
       <div class="col-md-4">
@@ -82,7 +83,7 @@
             <div class="form-group">
               <label for="logo">Logo</label>
               <p class="text-center">
-                <img src="{{ $store->logo or '/img/nologo.png' }}" class="img-fluid">
+                <img src="{{ $store->logo or '/img/nologo.png' }}" class="rounded-circle img-fluid">
               </p>
               <input type="file" class="form-control" id="logo" name="logo">
             </div>
@@ -131,11 +132,12 @@
     </div>
   </form>
 
+
     {!! Form::open([
     'method' => 'DELETE',
     'route' => ['admin.categories.destroy', $store->id]
     ]) !!}
         {!! Form::submit('Delete this this?', ['class' => 'btn btn-danger btn-sm pull-right']) !!}
     {!! Form::close() !!}
-
+</div>
 @endsection

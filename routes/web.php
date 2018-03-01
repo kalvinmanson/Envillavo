@@ -28,6 +28,7 @@ Auth::routes();
 
 Route::prefix('dashboard')->namespace('Dashboard')->as('dashboard')->middleware('auth')->group(function () {
   Route::resource('stores', 'StoreController');
+  Route::resource('users', 'UserController');
 });
 
 Route::get('/home', 'WebController@index')->name('home');

@@ -1,24 +1,19 @@
 @extends('layouts.app')
-@section('title', 'Bienvenido a Drodmin')
+@section('title', 'Todo lo que buscas En Villavo')
 @section('meta-keywords', 'Keywords for seo')
 @section('meta-description', 'Description for SEO')
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
-
-                <div class="panel-body">
-                  <div class="animated bounceInLeft">
-                    You are logged in! <i class="fa fa-user"></i> -----
-                    <a href="/content/user_1/images/logo-dronico.png" class="btn btn-primary" data-fancybox>Test Btn</a>
-                  </div>
-                </div>
-            </div>
+<div class="search">
+  <div class="container text-center">
+    <form action="/buscar" method="GET" class="p-1 p-lg-5">
+      <h1>Todo lo que estas buscando <span class="text-primary">En Villavo.</span></h1>
+      <div class="input-group mb-3">
+        <input name="q" type="text" class="form-control form-control-lg" placeholder="Comprar casa en villavicencio..." aria-label="Buscar" aria-describedby="basic-addon2">
+        <div class="input-group-append">
+          <button class="btn btn-outline-primary btn-lg" type="button"><i class="fa fa-search"></i> Buscar</button>
         </div>
-    </div>
-    <hr>
-    @include('partials.forms.contact')
+      </div>
+    </form>
+  </div>
 </div>
 @endsection

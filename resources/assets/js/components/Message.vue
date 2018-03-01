@@ -1,27 +1,23 @@
 <template>
-  <div>
-    <div class="col-md-8 col-md-offset-2">
-        <div class="panel panel-default" v-for="message in messages">
-            <div class="panel-heading"><strong>{{ message.record.name }}</strong></div>
-            <div class="panel-body">
-                <p>{{ message.chat }}</p>
+  <div class="card card-success">
+    <div class="card-body p-0">
+        <div class="scrolleable" v-chat-scroll>
+          <div v-for="message in messages">
+            <div class="chatMessage" v-bind:class="{ admin: message.admin }">
+                <small class="text-muted">{{ message.chat }}</small>
             </div>
+          </div>
         </div>
     </div>
-
-    <div class="col-md-8 col-md-offset-2">
-        <div class="panel panel-default">
-            <div class="panel-footer">
-                <form @submit.prevent.keyup="sent">
-                    <div class="form-group">
-                        <input type="text" class="form-control" v-model="message.chat">
-                    </div>
-                    <div class="form-group">
-                        <button type="submit" class=" btn btn-primary">Enviar mensaje</button>
-                    </div>
-                </form>
-            </div>
+    <div class="card-footer">
+      <form @submit.prevent.keyup="sent">
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="escribenos..." v-model="message.chat" required>
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="submit"><i class="fa fa-paper-plane"></i></button>
+          </div>
         </div>
+      </form>
     </div>
   </div>
 </template>
@@ -62,6 +58,7 @@
                     this.messages.push(e)
                     this.last = e.id;
                   }.bind(this));
+
                 })
             },
             getNewMessages() {
@@ -73,10 +70,3 @@
         }
     }
 </script>
-
-<style scoped>
-    .panel{
-        margin-bottom: 0;
-    }
-
-</style>

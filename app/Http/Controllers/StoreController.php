@@ -11,6 +11,9 @@ class StoreController extends Controller
     public function show($slug)
     {
       $store = Store::where('slug', $slug)->first();
+      $store->views += 1;
+      $store->save();
+      
       return view('stores.show', compact('store'));
     }
 }

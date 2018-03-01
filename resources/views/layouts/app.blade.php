@@ -16,21 +16,15 @@
 </head>
 <body>
   <div id="app">
-    <header>
-      <div class="container">
-          <h1>Header</h1>
-      </div>
-    </header>
+    @include('partials.menu')
     <div class="container">
         @include('flash::message')
         @include('partials.errors')
     </div>
-    <div class="container">
-        @yield('content')
-    </div>
+    @yield('content')
     <footer>
       <div class="container">
-          <p>&copy; 2018 By <a href="//droni.co">Droni.co</a></p>
+          <p>&copy; 2018 By <a href="//droni.co" title="Desarrollo Inteligente">Droni.co</a></p>
       </div>
     </footer>
   </div>
