@@ -46,6 +46,10 @@ Route::get('cat/{slug}', 'WebController@category')->where('slug', '[a-z,0-9-]+')
 Route::get('/chats/{record_id}/{last}', 'ChatController@fetch')->where('record_id', '[0-9]+')->where('last', '[0-9]+');
 Route::post('/chats/{record_id}', 'ChatController@send')->where('record_id', '[0-9]+');
 
+//records
+Route::post('/record', 'RecordController@store');
+
 //Stores y landings
+Route::get('/buscar', 'StoreController@index');
 Route::get('{store}/{slug}', 'LandingController@show')->where('store', '[a-z,0-9-]+')->where('slug', '[a-z,0-9-]+');
 Route::get('{slug}', 'StoreController@show')->where('slug', '[a-z,0-9-]+');

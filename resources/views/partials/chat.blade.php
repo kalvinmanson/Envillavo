@@ -1,1 +1,1 @@
-<message :messages="messages" :record="{{ App\Record::find(1) }}"></message>
+<message :messages="messages" :record="{{ $record }}"></message>

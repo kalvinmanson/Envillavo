@@ -6,12 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="keywords"  content="@yield('meta-keywords')">
     <meta name="description"  content="@yield('meta-description')" />
-
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
     <title>@yield('title')</title>
 
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
 
 </head>
 <body>
@@ -22,8 +22,27 @@
         @include('partials.errors')
     </div>
     @yield('content')
-    <footer>
+    <footer class="bg-dark text-white py-3">
       <div class="container">
+        <div class="row">
+          <div class="col-sm-4">
+            <h5>En Villavo</h5>
+            <ul>
+              <li><a href="#">Quiénes somos</a></li>
+              <li><a href="#">Para empresas y comercios</a></li>
+              <li><a href="#">Políticas de privacidad</a></li>
+            </ul>
+          </div>
+          <div class="col-sm-4">
+
+          </div>
+          <div class="col-sm-4 text-right">
+            <div class="btn-group" role="group" aria-label="Redes sociales">
+              <a href="https://www.facebook.com/envillavo/" target="_blank" class="btn btn-primary"><i class="fa fa-facebook"></i></a>
+              <a href="#" target="_blank" class="btn btn-info"><i class="fa fa-twitter"></i></a>
+            </div>
+          </div>
+        </div>
           <p>&copy; 2018 By <a href="//droni.co" title="Desarrollo Inteligente">Droni.co</a></p>
       </div>
     </footer>
