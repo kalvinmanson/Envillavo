@@ -10,7 +10,12 @@ use Illuminate\Http\Request;
 class StoreController extends Controller
 {
   public function index(Request $request) {
-    $stores = Store::inRandomOrder()->limit(12)->get();
+
+    if($request->q) {
+      $stores = Store::where('description', 'LIKE', '%'.$request->q.'%')->orderBy('views', 'desc')->limit(50)->get();
+    } else {
+      $stores = Store::inRandomOrder()->limit(12)->get();
+    }
     return view('stores.index', compact('stores'));
   }
     public function show($slug)

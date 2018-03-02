@@ -11,7 +11,7 @@
       <div class="input-group mb-3">
         <input name="q" type="text" class="form-control form-control-lg" placeholder="Comprar casa en villavicencio..." required autofocus>
         <div class="input-group-append">
-          <button class="btn btn-outline-primary btn-lg" type="button"><i class="fa fa-search"></i> Buscar</button>
+          <button class="btn btn-outline-primary btn-lg" type="submit"><i class="fa fa-search"></i> Buscar</button>
         </div>
       </div>
     </form>
