@@ -18,7 +18,7 @@ class StoreController extends Controller
     }
     public function store(Request $request) {
     	$this->validate(request(), [
-            'name' => ['required', 'max:100']
+            'name' => ['required', 'min:10', 'max:100']
         ]);
 
         $store = new Store;
@@ -46,7 +46,8 @@ class StoreController extends Controller
         $store = Store::withTrashed()->find($id);
 
         $this->validate(request(), [
-            'name' => ['required', 'max:200'],
+            'name' => ['required', 'min:10', 'max:200'],
+            'description' => ['required', 'min:50', 'max:250'],
             'logo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:500',
             'cover' => 'image|mimes:jpeg,png,jpg,gif,svg|max:500',
         ]);

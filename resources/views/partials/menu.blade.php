@@ -17,18 +17,31 @@
         </li>
       </ul>
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="/dashboard/stores">Escritorio</a>
-        </li>
         @if(Auth::check())
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
+            Comercio
+          </a>
+          <div class="dropdown-menu">
+            @foreach(Auth::user()->stores as $menuStore)
+              <a class="dropdown-item" href="/{{ $menuStore->slug }}">{{ $menuStore->name }}</a>
+            @endforeach
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/stores/new">Crear nuevo <i class="fa fa-plus"></i></a>
+          </div>
+        </li>
         <li class="nav-item">
-          <a class="nav-link" href="/users/my"><i class="fa fa-bell"></i></a>
+          <a class="nav-link" href="#">Perfil</a>
         </li>
         <li class="nav-item">
             <a href="{{ route('logout') }}" class="nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-power-off"></i></a>
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 {{ csrf_field() }}
             </form>
+        </li>
+        @else
+        <li class="nav-item">
+          <a class="nav-link" href="/login">Entrar</a>
         </li>
         @endif
       </ul>

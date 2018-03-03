@@ -12,7 +12,7 @@
       <div class="card-body">
         <div class="row">
           <div class="col-sm-2 text-center">
-            <img class="rounded-circle img-fluid" src="{{ $store->logo }}" alt="{{ $store->name }}">
+            <img class="rounded-circle img-fluid" src="{{ $store->logo or '/img/no-logo.jpg' }}" alt="{{ $store->name }}">
             <p class="text-muted">
               <small>
                 <i class="fa fa-eye"></i> {{ $store->views }} | <i class="fa fa-star-o"></i> {{ $store->rank }}

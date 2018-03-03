@@ -37,7 +37,7 @@
           </div>
           <div class="form-group">
             <label for="schedule">Horarios <i class="fa fa-clock-o"></i></label>
-            <input type="text" class="form-control" id="schedule" name="schedule" value="{{ old('schedule') ? old('schedule') : $store->schedule }}">
+            <input type="text" class="form-control" id="schedule" name="schedule" value="{{ old('schedule') ? old('schedule') : $store->schedule }}" placeholder="ej. Lunes a Viernes 9:00 am a 5:00 pm">
           </div>
 
           <div class="card my-3">
@@ -66,7 +66,7 @@
           </div>
           <div class="form-group">
               <label for="description">Description corta</label>
-              <textarea class="form-control" id="description" name="description" placeholder="Describe your category">{{ old('description') ? old('description') : $store->description }}</textarea>
+              <textarea class="form-control" id="description" name="description" placeholder="Describe tu comercio, dinos a que te dedicas y que es lo que ofreces." required>{{ old('description') ? old('description') : $store->description }}</textarea>
           </div>
           <div class="form-group">
               <label for="content">Descripcion completa de tu comercio</label>
@@ -82,15 +82,21 @@
           <div class="card-body">
             <div class="form-group">
               <label for="logo">Logo</label>
-              <p class="text-center">
-                <img src="{{ $store->logo or '/img/nologo.png' }}" class="rounded-circle img-fluid">
-              </p>
-              <input type="file" class="form-control" id="logo" name="logo">
+              <div class="row">
+                <div class="col-sm-4">
+                  <img src="{{ $store->logo or '/img/no-logo.jpg' }}" class="rounded-circle img-fluid">
+                </div>
+                <div class="col-sm-8">
+                  <input type="file" class="form-control" id="logo" name="logo">
+                  <small class="form-text text-muted">Imagen JPG o PNG optimizada para web de 400x400px.</small>
+                </div>
+              </div>
+
             </div>
             <div class="form-group">
               <label for="logo">Cover</label>
               <p class="text-center">
-                <img src="{{ $store->cover or '/img/nologo.png' }}" class="img-fluid">
+                <img src="{{ $store->cover or '/img/no-cover.jpg' }}" class="img-fluid">
               </p>
               <input type="file" class="form-control" id="cover" name="cover">
             </div>

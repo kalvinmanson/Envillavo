@@ -9,7 +9,7 @@
     <div class="card-columns">
     @foreach($stores as $store)
         <div class="card">
-          <img class="card-img-top" src="{{ $store->cover }}" alt="{{ $store->name }}">
+          <img class="card-img-top" src="{{ $store->cover or '/img/no-cover.jpg' }}" alt="{{ $store->name }}">
           <div class="card-body">
             <a href="/{{ $store->slug }}" title="{{ $store->name }}">
               <h3>{{ $store->name }}</h3>

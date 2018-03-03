@@ -59,8 +59,8 @@ $screen-md-max: ($screen-lg-min - 1);
 */
 @import url('https://fonts.googleapis.com/css?family=Lato:400,700,900|Raleway:400,700');
 
-a { color: $blue; }
-a:hover { color: $cyan; text-decoration: none; }
+a {  }
+a:hover { text-decoration: none; }
 body {
   font-family: 'Raleway', sans-serif;
 }

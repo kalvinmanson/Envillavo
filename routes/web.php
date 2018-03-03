@@ -51,5 +51,7 @@ Route::post('/record', 'RecordController@store');
 
 //Stores y landings
 Route::get('/buscar', 'StoreController@index');
+Route::get('{slug}/edit', 'StoreController@edit')->where('slug', '[a-z,0-9-]+');
+Route::post('{slug}/update', 'StoreController@update')->where('slug', '[a-z,0-9-]+');
 Route::get('{store}/{slug}', 'LandingController@show')->where('store', '[a-z,0-9-]+')->where('slug', '[a-z,0-9-]+');
 Route::get('{slug}', 'StoreController@show')->where('slug', '[a-z,0-9-]+');

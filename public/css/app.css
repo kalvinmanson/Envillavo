@@ -17268,12 +17268,7 @@ body.trumbowyg-body-fullscreen {
 @media (min-width: $screen-lg-min) { ... }
 */
 
-a {
-  color: #00557e;
-}
-
 a:hover {
-  color: #12bbc2;
   text-decoration: none;
 }
 

@@ -18,22 +18,92 @@ class StoreController extends Controller
     }
     return view('stores.index', compact('stores'));
   }
-    public function show($slug)
-    {
+  public function show($slug)
+  {
+    $store = Store::where('slug', $slug)->first();
+    $record = $this->getRecord($store->id);
+    $store->views += 1;
+    $store->save();
+
+    return view('stores.show', compact('store', 'record'));
+  }
+
+  public function edit($slug) {
       $store = Store::where('slug', $slug)->first();
-      $record = $this->getRecord($store->id);
-      $store->views += 1;
+      return view('stores.edit', compact('store'));
+  }
+
+  public function update($slug, Request $request) {
+
+      $store = Store::where('slug', $slug)->first();
+
+      $this->validate(request(), [
+          'name' => ['required', 'min:10', 'max:200'],
+          'description' => ['required', 'min:50', 'max:250'],
+          'logo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:500',
+          'cover' => 'image|mimes:jpeg,png,jpg,gif,svg|max:500',
+      ]);
+      //restore trashed item
+      if($request->untrash) {
+          $store->restore();
+      }
+
+      $store->name = $request->name;
+      $store->city = $request->city;
+      $store->address = $request->address;
+      $store->lat = $request->lat;
+      $store->lng = $request->lng;
+      $store->phone = $request->phone;
+      $store->mobile = $request->mobile;
+      $store->schedule = $request->schedule;
+      $store->facebook = $request->facebook;
+      $store->twitter = $request->twitter;
+      $store->tags = $request->tags;
+      $store->description = $request->description;
+      $store->content = $request->content;
+      $store->metakeywords = $request->metakeywords;
+      $store->metadescription = $request->metadescription;
+      $store->colorset = $request->colorset;
+
+      //upload logo
+      if($request->hasFile('logo') && $request->file('logo')->isValid()) {
+        $file = $request->file('logo');
+        $img = Image::make($file)->fit(300)->encode();
+        $name = $store->slug.'-logo.'.$file->getClientOriginalExtension();
+        Storage::disk('public')->put($name, $img);
+        $store->logo = '/storage/'.$name;
+      }
+      //upload cover
+      if($request->hasFile('cover') && $request->file('cover')->isValid()) {
+        $file = $request->file('cover');
+        $img = Image::make($file)->fit(1200,600)->encode();
+        $name = $store->slug.'-cover.'.$file->getClientOriginalExtension();
+        Storage::disk('public')->put($name, $img);
+        $store->cover = '/storage/'.$name;
+      }
+
       $store->save();
 
-      return view('stores.show', compact('store', 'record'));
-    }
-
-    private function getRecord($store_id) {
-      $records = session('records');
-      if(!is_array($records)) {
-        $records = [];
-        session(['records' => []]);
+      flash('Tus cambios han sido guardados.')->success();
+      return redirect()->action('StoreController@show', $store->slug);
+  }
+  public function destroy($id) {
+      if(!$this->hasrole('Admin')) { return redirect('/'); }
+      $store = Store::withTrashed()->find($id);
+      if($store->trashed()) {
+          $store->forceDelete();
       }
-      return Record::whereIn('id', $records)->where('store_id', $store_id)->first();
+      Store::destroy($store->id);
+      flash('Record deleted')->success();
+      return redirect()->action('Dashboard\StoreController@index');
+  }
+
+  private function getRecord($store_id) {
+    $records = session('records');
+    if(!is_array($records)) {
+      $records = [];
+      session(['records' => []]);
     }
+    return Record::whereIn('id', $records)->where('store_id', $store_id)->first();
+  }
 }
