@@ -24,6 +24,7 @@ class CreateRecordsTable extends Migration
             $table->float('lng')->nullable();
             $table->date('birthdate')->nullable();
             $table->string('gender')->nullable();
+            $table->text('content')->nullable();
             $table->timestamps();
         });
     }

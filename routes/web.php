@@ -24,7 +24,10 @@ Route::prefix('admin')->namespace('Admin')->as('admin.')->middleware('auth')->gr
 	Route::post('pages/duplicate', ['as' => 'pages.duplicate', 'uses' => 'PageController@duplicate']);
 });
 
+//Login
 Auth::routes();
+Route::get('login/facebook', 'Auth\LoginController@redirectToProvider');
+Route::get('auth/facebook/callback', 'Auth\LoginController@handleProviderCallback');
 
 Route::prefix('dashboard')->namespace('Dashboard')->as('dashboard')->middleware('auth')->group(function () {
   Route::resource('stores', 'StoreController');
