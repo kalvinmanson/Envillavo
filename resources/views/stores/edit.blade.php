@@ -30,6 +30,22 @@
             <div class="row">
               <div class="col-sm-6">
                 <div class="form-group">
+                  <label for="email">Email de contacto</label>
+                  <input type="email" class="form-control" id="email" name="email" value="{{ old('email') ? old('email') : Auth::user()->email }}">
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="category">Categoría</label>
+                  <select name="category" id="category" class="form-control">
+                    <option value="General">General</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
                   <label for="phone">Teléfono</label>
                   <input type="text" class="form-control" id="phone" name="phone" value="{{ old('phone') ? old('phone') : $store->phone }}">
                 </div>

@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 use App\Store;
 use App\Record;
 use Auth;
+use Storage;
+use File;
+use Image;
 
 use Illuminate\Http\Request;
 
@@ -17,6 +20,37 @@ class StoreController extends Controller
       $stores = Store::inRandomOrder()->limit(12)->get();
     }
     return view('stores.index', compact('stores'));
+  }
+  public function create() {
+    return view('stores.create');
+  }
+  public function store(Request $request) {
+    $this->validate(request(), [
+        'name' => ['required', 'min:10', 'max:100']
+    ]);
+
+    $store = new Store;
+    $store->user_id = Auth::user()->id;
+    $store->name = $request->name;
+    //Validar unico slug
+    $slug = str_slug($request->name);
+    $validate = Store::where('slug', $slug)->get();
+    if(count($validate) > 0) {
+        $slug = $slug . '-' . count($validate);
+    }
+    $store->slug = $slug;
+    $store->category = $request->category;
+    $store->email = $request->email;
+    $store->city = $request->city;
+    $store->address = $request->address;
+    $store->phone = $request->phone;
+    $store->mobile = $request->mobile;
+    $store->schedule	 = $request->schedule	;
+    $store->description = $request->description;
+    $store->save();
+
+    flash('Tu nuevo comercio ha sido creado, ahora puedes agregar toda la información en el.')->success();
+    return redirect()->action('StoreController@show', $store->slug);
   }
   public function show($slug)
   {
@@ -49,6 +83,8 @@ class StoreController extends Controller
       }
 
       $store->name = $request->name;
+      $store->category = $request->category;
+      $store->email = $request->email;
       $store->city = $request->city;
       $store->address = $request->address;
       $store->lat = $request->lat;

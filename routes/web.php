@@ -29,11 +29,6 @@ Auth::routes();
 Route::get('login/facebook', 'Auth\LoginController@redirectToProvider');
 Route::get('auth/facebook/callback', 'Auth\LoginController@handleProviderCallback');
 
-Route::prefix('dashboard')->namespace('Dashboard')->as('dashboard')->middleware('auth')->group(function () {
-  Route::resource('stores', 'StoreController');
-  Route::resource('users', 'UserController');
-});
-
 Route::get('/home', 'WebController@index')->name('home');
 Route::get('/admin', function() {
 	return redirect()->route('admin.pages.index');
@@ -52,8 +47,12 @@ Route::post('/chats/{record_id}', 'ChatController@send')->where('record_id', '[0
 //records
 Route::post('/record', 'RecordController@store');
 
+
+
 //Stores y landings
 Route::get('/buscar', 'StoreController@index');
+Route::get('/stores/create', 'StoreController@create')->middleware('auth');
+Route::post('/stores', 'StoreController@store')->middleware('auth');
 Route::get('{slug}/edit', 'StoreController@edit')->where('slug', '[a-z,0-9-]+');
 Route::post('{slug}/update', 'StoreController@update')->where('slug', '[a-z,0-9-]+');
 Route::get('{store}/{slug}', 'LandingController@show')->where('store', '[a-z,0-9-]+')->where('slug', '[a-z,0-9-]+');

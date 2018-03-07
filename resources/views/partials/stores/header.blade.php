@@ -19,7 +19,7 @@
                 <p>Para ver numeros de telófono, dirección y otros datos de este comercio completa los sigueinte datos.</p>
               </div>
               <div class="col-md-6">
-                @if(isset($record) && $record != null)
+                @if((isset($record) && $record != null) || (Auth::check() && Auth::user()->id == $store->user_id))
                 <p class="card-text">
                   <i class="fa fa-phone"></i> {{ $store->phone }}<br>
                   <i class="fa fa-whatsapp"></i> {{ $store->mobile }}<br>

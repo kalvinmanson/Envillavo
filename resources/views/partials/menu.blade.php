@@ -27,7 +27,7 @@
               <a class="dropdown-item" href="/{{ $menuStore->slug }}">{{ $menuStore->name }}</a>
             @endforeach
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="/stores/new">Crear nuevo <i class="fa fa-plus"></i></a>
+            <a class="dropdown-item" href="/stores/create">Crear nuevo <i class="fa fa-plus"></i></a>
           </div>
         </li>
         <li class="nav-item">
