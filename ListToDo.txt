@@ -1,8 +1,8 @@
 
-Login Google
-
-Boton 
-  Ver telefonos
+Login Google **
+No captcha
+Boton
+  Ver telefonos validaciones records views
   Ver mapa
   Enviar mensaje (Chat)
   Views solo en boton

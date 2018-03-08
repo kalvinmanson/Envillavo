@@ -60,40 +60,12 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 50);
+/******/ 	return __webpack_require__(__webpack_require__.s = 265);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 1:
-/***/ (function(module, exports) {
-
-var g;
-
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || Function("return this")() || (1,eval)("this");
-} catch(e) {
-	// This works if the window reference is available
-	if(typeof window === "object")
-		g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
-
-/***/ }),
-
-/***/ 2:
+/***/ 18:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -10465,7 +10437,57 @@ return jQuery;
 
 /***/ }),
 
-/***/ 3:
+/***/ 265:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(266);
+
+
+/***/ }),
+
+/***/ 266:
+/***/ (function(module, exports, __webpack_require__) {
+
+try {
+    window.$ = window.jQuery = __webpack_require__(18);
+
+    __webpack_require__(30);
+    __webpack_require__(32);
+} catch (e) {}
+
+$(".ckfile").click(function () {
+    var id = $(this).attr('id');
+    openKCFinder(id);
+    function openKCFinder(field) {
+        window.KCFinder = {
+            callBack: function callBack(url) {
+                $("#" + id).val(url);
+                window.KCFinder = null;
+            }
+        };
+        window.open('/editor/kcfinder/browse.php?type=images&dir=files/public', 'kcfinder_textbox', 'status=0, toolbar=0, location=0, menubar=0, directories=0, ' + 'resizable=1, scrollbars=0, width=800, height=600');
+    }
+});
+
+$(".tr_addField").click(function () {
+    var newField = $("#new_config").val();
+    $('#tableTarget tr:last').after('<tr><td>' + newField + '</td><td><input type="text" name="config[' + newField + ']" value="" class="form-control"></td></tr>');
+});
+
+$("[data-fancybox]").fancybox({
+    // Options will go here
+});
+
+$(".tr_name_field").dblclick(function () {
+    $(this).replaceWith("<input type='text' class='form-control' name='name' required>");
+});
+$(".tr_format_field").dblclick(function () {
+    $(this).replaceWith("<input type='text' class='form-control' name='format' required>");
+});
+
+/***/ }),
+
+/***/ 30:
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
@@ -10474,7 +10496,7 @@ return jQuery;
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
   */
 (function (global, factory) {
-	 true ? factory(exports, __webpack_require__(2), __webpack_require__(4)) :
+	 true ? factory(exports, __webpack_require__(18), __webpack_require__(31)) :
 	typeof define === 'function' && define.amd ? define(['exports', 'jquery', 'popper.js'], factory) :
 	(factory((global.bootstrap = {}),global.jQuery,global.Popper));
 }(this, (function (exports,$,Popper) { 'use strict';
@@ -14366,14 +14388,14 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 /***/ }),
 
-/***/ 4:
+/***/ 31:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* WEBPACK VAR INJECTION */(function(global) {/**!
  * @fileOverview Kickass library to create and place poppers near their reference elements.
- * @version 1.12.9
+ * @version 1.13.0
  * @license
  * Copyright (c) 2016 Federico Zivolo and contributors
  *
@@ -16809,11 +16831,11 @@ Popper.Defaults = Defaults;
 /* harmony default export */ __webpack_exports__["default"] = (Popper);
 //# sourceMappingURL=popper.js.map
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1)))
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(7)))
 
 /***/ }),
 
-/***/ 5:
+/***/ 32:
 /***/ (function(module, exports) {
 
 // ==================================================
@@ -21972,53 +21994,31 @@ Popper.Defaults = Defaults;
 
 /***/ }),
 
-/***/ 50:
-/***/ (function(module, exports, __webpack_require__) {
+/***/ 7:
+/***/ (function(module, exports) {
 
-module.exports = __webpack_require__(51);
+var g;
 
-
-/***/ }),
-
-/***/ 51:
-/***/ (function(module, exports, __webpack_require__) {
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
 
 try {
-    window.$ = window.jQuery = __webpack_require__(2);
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1,eval)("this");
+} catch(e) {
+	// This works if the window reference is available
+	if(typeof window === "object")
+		g = window;
+}
 
-    __webpack_require__(3);
-    __webpack_require__(5);
-} catch (e) {}
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
 
-$(".ckfile").click(function () {
-    var id = $(this).attr('id');
-    openKCFinder(id);
-    function openKCFinder(field) {
-        window.KCFinder = {
-            callBack: function callBack(url) {
-                $("#" + id).val(url);
-                window.KCFinder = null;
-            }
-        };
-        window.open('/editor/kcfinder/browse.php?type=images&dir=files/public', 'kcfinder_textbox', 'status=0, toolbar=0, location=0, menubar=0, directories=0, ' + 'resizable=1, scrollbars=0, width=800, height=600');
-    }
-});
+module.exports = g;
 
-$(".tr_addField").click(function () {
-    var newField = $("#new_config").val();
-    $('#tableTarget tr:last').after('<tr><td>' + newField + '</td><td><input type="text" name="config[' + newField + ']" value="" class="form-control"></td></tr>');
-});
-
-$("[data-fancybox]").fancybox({
-    // Options will go here
-});
-
-$(".tr_name_field").dblclick(function () {
-    $(this).replaceWith("<input type='text' class='form-control' name='name' required>");
-});
-$(".tr_format_field").dblclick(function () {
-    $(this).replaceWith("<input type='text' class='form-control' name='format' required>");
-});
 
 /***/ })
 

@@ -31,6 +31,7 @@ class RecordController extends Controller
       $record->lng = $request->lng;
       $record->birthdate = $request->birthdate;
       $record->gender = $request->gender;
+      $record->content = $request->content;
       $record->save();
 
       //store in session

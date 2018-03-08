@@ -8,13 +8,13 @@
         <div class="col-sm-8">
           <div class="form-group">
             <label for="name">Nombre del comercio</label>
-            <input type="text" class="form-control form-control-lg" id="name" name="name" value="{{ old('name') ? old('name') : '' }}">
+            <input type="text" class="form-control form-control-lg" id="name" name="name" value="{{ old('name') ? old('name') : '' }}" required>
           </div>
           <div class="row">
             <div class="col-sm-6">
               <div class="form-group">
                 <label for="email">Email de contacto</label>
-                <input type="email" class="form-control" id="email" name="email" value="{{ old('email') ? old('email') : Auth::user()->email }}">
+                <input type="email" class="form-control" id="email" name="email" value="{{ old('email') ? old('email') : Auth::user()->email }}" required>
               </div>
             </div>
             <div class="col-sm-6">
@@ -30,13 +30,13 @@
             <div class="col-sm-6">
               <div class="form-group">
                 <label for="phone">Teléfono</label>
-                <input type="text" class="form-control" id="phone" name="phone" value="{{ old('phone') ? old('phone') :'' }}">
+                <input type="text" class="form-control" id="phone" name="phone" value="{{ old('phone') ? old('phone') :'' }}" required>
               </div>
             </div>
             <div class="col-sm-6">
               <div class="form-group">
                 <label for="mobile">Movil <i class="fa fa-whatsapp"></i></label>
-                <input type="text" class="form-control" id="mobile" name="mobile" value="{{ old('mobile') ? old('mobile') : '' }}">
+                <input type="text" class="form-control" id="mobile" name="mobile" value="{{ old('mobile') ? old('mobile') : '' }}" required>
               </div>
             </div>
           </div>
@@ -61,10 +61,11 @@
                 <div class="col-sm-8">
                   <div class="form-group">
                     <label for="address">Dirección</label>
-                    <input type="text" class="form-control" id="address" name="address" value="{{ old('address') ? old('address') : '' }}">
+                    <input type="text" class="form-control" id="address" name="address" value="{{ old('address') ? old('address') : '' }}" required>
                   </div>
                 </div>
               </div>
+              <mapa :initlat="{{ old('lat') ? old('lat') : 0 }}" :initlng="{{ old('lng') ? old('lng') : 0 }}"></mapa>
             </div>
           </div>
           <div class="form-group">

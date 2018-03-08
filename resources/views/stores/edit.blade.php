@@ -25,13 +25,13 @@
             @endif
             <div class="form-group">
               <label for="name">Nombre del comercio</label>
-              <input type="text" class="form-control form-control-lg" id="name" name="name" value="{{ old('name') ? old('name') : $store->name }}">
+              <input type="text" class="form-control form-control-lg" id="name" name="name" value="{{ old('name') ? old('name') : $store->name }}" required>
             </div>
             <div class="row">
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="email">Email de contacto</label>
-                  <input type="email" class="form-control" id="email" name="email" value="{{ old('email') ? old('email') : Auth::user()->email }}">
+                  <input type="email" class="form-control" id="email" name="email" value="{{ old('email') ? old('email') : Auth::user()->email }}"  required>
                 </div>
               </div>
               <div class="col-sm-6">
@@ -47,19 +47,19 @@
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="phone">Teléfono</label>
-                  <input type="text" class="form-control" id="phone" name="phone" value="{{ old('phone') ? old('phone') : $store->phone }}">
+                  <input type="text" class="form-control" id="phone" name="phone" value="{{ old('phone') ? old('phone') : $store->phone }}" required>
                 </div>
               </div>
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="mobile">Movil <i class="fa fa-whatsapp"></i></label>
-                  <input type="text" class="form-control" id="mobile" name="mobile" value="{{ old('mobile') ? old('mobile') : $store->mobile }}">
+                  <input type="text" class="form-control" id="mobile" name="mobile" value="{{ old('mobile') ? old('mobile') : $store->mobile }}" required>
                 </div>
               </div>
             </div>
             <div class="form-group">
               <label for="schedule">Horarios <i class="fa fa-clock-o"></i></label>
-              <input type="text" class="form-control" id="schedule" name="schedule" value="{{ old('schedule') ? old('schedule') : $store->schedule }}" placeholder="ej. Lunes a Viernes 9:00 am a 5:00 pm">
+              <input type="text" class="form-control" id="schedule" name="schedule" value="{{ old('schedule') ? old('schedule') : $store->schedule }}" placeholder="ej. Lunes a Viernes 9:00 am a 5:00 pm" required>
             </div>
 
             <div class="card my-3">
@@ -78,12 +78,12 @@
                   <div class="col-sm-8">
                     <div class="form-group">
                       <label for="address">Dirección</label>
-                      <input type="text" class="form-control" id="address" name="address" value="{{ old('address') ? old('address') : $store->address }}">
+                      <input type="text" class="form-control" id="address" name="address" value="{{ old('address') ? old('address') : $store->address }}" required>
                     </div>
-                    <input type="hidden" class="form-control" id="lat" name="lat" value="{{ old('lat') ? old('lat') : $store->lat }}">
-                    <input type="hidden" class="form-control" id="lng" name="lng" value="{{ old('lng') ? old('lng') : $store->lng }}">
                   </div>
                 </div>
+
+                <mapa :initlat="{{ $store->lat }}" :initlng="{{ $store->lng }}"></mapa>
               </div>
             </div>
             <div class="form-group">
@@ -159,12 +159,14 @@
         </div>
       </div>
     </form>
+    {{--
       {!! Form::open([
       'method' => 'DELETE',
       'route' => ['admin.categories.destroy', $store->id]
       ]) !!}
           {!! Form::submit('Delete this this?', ['class' => 'btn btn-danger btn-sm pull-right']) !!}
       {!! Form::close() !!}
+      --}}
     </div>
   </div>
   <div class="clearfix"></div>

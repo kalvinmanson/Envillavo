@@ -43,6 +43,8 @@ class StoreController extends Controller
     $store->email = $request->email;
     $store->city = $request->city;
     $store->address = $request->address;
+    $store->lat = $request->lat;
+    $store->lng = $request->lng;
     $store->phone = $request->phone;
     $store->mobile = $request->mobile;
     $store->schedule	 = $request->schedule	;

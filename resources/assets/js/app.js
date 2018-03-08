@@ -8,6 +8,15 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 window.Vue.use(require('vue-chat-scroll'));
+window.Vue.use(require('vue2-google-maps'), {
+  load: {
+    key: 'AIzaSyApOdZZRmEDb73KykBsvIOyIeVOQRl1vMQ',
+    libraries: 'places', // This is required if you use the Autocomplete plugin
+    // OR: libraries: 'places,drawing'
+    // OR: libraries: 'places,drawing,visualization'
+    // (as you require)
+  }
+})
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -18,6 +27,7 @@ window.Vue.use(require('vue-chat-scroll'));
 //Vue.component('example-component', require('./components/ExampleComponent.vue'));
 
 Vue.component('message', require('./components/Message.vue'));
+Vue.component('mapa', require('./components/Map.vue'));
 
 const app = new Vue({
     el: '#app',
