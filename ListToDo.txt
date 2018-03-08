@@ -1,3 +1,13 @@
-SortModel Lib table
-use mail()
-relationships
+
+Login Google
+
+Boton 
+  Ver telefonos
+  Ver mapa
+  Enviar mensaje (Chat)
+  Views solo en boton
+
+CRUD Landings
+Galeria
+Admin
+  Messages

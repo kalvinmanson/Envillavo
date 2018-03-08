@@ -26,8 +26,8 @@ Route::prefix('admin')->namespace('Admin')->as('admin.')->middleware('auth')->gr
 
 //Login
 Auth::routes();
-Route::get('login/facebook', 'Auth\LoginController@redirectToProvider');
-Route::get('auth/facebook/callback', 'Auth\LoginController@handleProviderCallback');
+Route::get('login/{provider}', 'Auth\LoginController@redirectToProvider');
+Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
 
 Route::get('/home', 'WebController@index')->name('home');
 Route::get('/admin', function() {

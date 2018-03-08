@@ -5,8 +5,16 @@
     <div class="row">
         <div class="col-md-6 m-auto">
             <div class="card">
-                <div class="card-header">Login</div>
+                <div class="card-header">Iniciar sesión</div>
                 <div class="card-body">
+                    <div class="text-center p-3">
+                      <p class="text-center">Puedes registrarte o iniciar sesión con un sólo click usando: </p>
+                      <div class="btn-group" role="group" aria-label="entrar con">
+                        <a href="/login/facebook" class="btn btn-lg btn-primary"><i class="fa fa-facebook"></i> Facebook</a>
+                        <a href="/login/google" class="btn btn-lg btn-danger"><i class="fa fa-google"></i> Google</a>
+                      </div>
+                    </div>
+                    <p class="text-center">O con tu email y contraseña: </p>
                     <form class="form-horizontal" method="POST" action="{{ route('login') }}">
                         {{ csrf_field() }}
 
@@ -22,7 +30,7 @@
                             </div>
                           </div>
                           <div class="form-group row">
-                            <label for="inputPassword" class="col-sm-3 col-form-label">Password</label>
+                            <label for="inputPassword" class="col-sm-3 col-form-label">Contraseña</label>
                             <div class="col-sm-9">
                               <input id="password" type="password" class="form-control" name="password" required>
                             </div>
