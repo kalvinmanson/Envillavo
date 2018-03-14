@@ -86,12 +86,13 @@
                 <mapa :initlat="{{ $store->lat }}" :initlng="{{ $store->lng }}"></mapa>
               </div>
             </div>
-            <div class="form-group">
+            <div class="form-group contarChars" data-chars=250>
+              <span class="visor text-muted float-right"></span>
                 <label for="description">Description corta</label>
-                <textarea class="form-control" id="description" name="description" placeholder="Describe tu comercio, dinos a que te dedicas y que es lo que ofreces." required>{{ old('description') ? old('description') : $store->description }}</textarea>
+                <textarea class="form-control textBox" id="description" name="description" placeholder="Describe tu comercio, dinos a que te dedicas y que es lo que ofreces." required>{{ old('description') ? old('description') : $store->description }}</textarea>
             </div>
             <div class="form-group">
-                <label for="content">Descripcion completa de tu comercio</label>
+                <label for="content">Página de bienvenida de tu comercio</label>
                 <textarea name="content" id="content" class="form-control editor">{{ old('content') ? old('content') : $store->content }}</textarea>
             </div>
             <div class="form-group">

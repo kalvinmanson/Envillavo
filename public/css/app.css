@@ -17298,6 +17298,10 @@ footer ul li a:hover {
   color: #fff;
 }
 
+.breaker {
+  word-wrap: break-word;
+}
+
 .bgIndex {
   min-height: 80vh;
   background-image: url(/img/bg-index.jpg);

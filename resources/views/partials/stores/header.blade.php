@@ -9,8 +9,8 @@
       </div>
       <div class="col-md-9">
 
-        <h1 class="title">{{ $store->name }}</h1>
-        <h2 class="description">{{ $store->description }}</h2>
+        <h1 class="title breaker">{{ $store->name }}</h1>
+        <h2 class="description breaker">{{ $store->description }}</h2>
 
         <ul class="nav nav-tabs" id="contacto" role="tablist">
           <li class="nav-item">
