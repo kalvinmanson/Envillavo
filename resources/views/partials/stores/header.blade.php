@@ -106,7 +106,7 @@
   <div class="collapse navbar-collapse" id="navbarText">
     <ul class="navbar-nav mr-auto">
       <a href="/{{ $store->slug }}/edit" class="nav-link"><i class="fa fa-edit"></i> Editar</a>
-      <a href="/dashboard/stores/{{ $store->id }}/edit" class="nav-link"><i class="fa fa-paper-plane"></i> Landings <span class="badge badge-secondary">{{ $store->landings->count() }}</i></a>
+      <a href="/{{ $store->slug }}/landings/" class="nav-link"><i class="fa fa-paper-plane"></i> Landings <span class="badge badge-secondary">{{ $store->landings->count() }}</i></a>
       <a href="/dashboard/stores/{{ $store->id }}/edit" class="nav-link"><i class="fa fa-comments-o"></i> Chats <span class="badge badge-secondary">{{ $store->records->count() }}</i></a>
     </ul>
     <span class="navbar-text">
