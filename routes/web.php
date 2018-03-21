@@ -47,7 +47,7 @@ Route::post('/chats/{record_id}', 'ChatController@send')->where('record_id', '[0
 //records
 Route::post('/record', 'RecordController@store');
 
-Route::get('/migrar', 'WebController@migrar');
+//Route::get('/migrar', 'WebController@migrar');
 
 
 //landings crud

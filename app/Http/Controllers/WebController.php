@@ -35,7 +35,7 @@ class WebController extends Controller
             return view('web/page', compact('page'));
         }
     }
-    public function migrar() {
+    /*public function migrar() {
       $string = file_get_contents(public_path("tiendas.json"));
       $records = json_decode($string, true);
 
@@ -126,5 +126,5 @@ class WebController extends Controller
         }
 
         return $data;
-    }
+    }*/
 }
