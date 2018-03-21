@@ -1,16 +1,16 @@
-<div class="cover" style="background-image: url({{ $store->cover or '/img/no-cover.jpg' }})">
+<div class="cover" style="background-image: url({{ $landing->cover or '/img/no-cover.jpg' }})">
   <div class="container">
     <div class="row py-3 py-lg-5">
       <div class="col-sm-3 text-center">
-        <img src="{{ $store->logo or '/img/no-logo.jpg' }}" class="rounded-circle img-fluid">
+        <img src="{{ $landing->picture or '/img/no-picture.jpg' }}" class="rounded-circle img-fluid">
         <h5 class="bg-light rounded d-inline p-2 my-2">
-          <i class="fa fa-eye"></i> {{ $store->views }} | <i class="fa fa-star-o"></i> {{ $store->rank }}
+          <i class="fa fa-eye"></i> {{ $landing->views }} | <i class="fa fa-star-o"></i> {{ $landing->rank }}
         </h5>
       </div>
       <div class="col-md-9">
 
-        <h1 class="title breaker">{{ $store->name }}</h1>
-        <h2 class="description breaker">{{ $store->description }}</h2>
+        <h1 class="title breaker">{{ $landing->name }}</h1>
+        <h2 class="description breaker">{{ $landing->description }}</h2>
 
         <ul class="nav nav-tabs" id="contacto" role="tablist">
           <li class="nav-item">
@@ -50,7 +50,7 @@
                     <textarea name="content" id="content" class="form-control" required rows=6></textarea>
                   </div>
                   <div class="form-group">
-                    <input type="hidden" name="store_id" value="{{ $store->id }}">
+                    <input type="hidden" name="landing_id" value="{{ $landing->id }}">
                     <button type="submit" class="btn btn-success">Enviar mensaje</button>
                   </div>
                 </div>
@@ -62,16 +62,16 @@
               <div class="col-sm-6">
                 <h5>Puedes llamarnos en estos teléfonos:</h5>
                 <p class="card-text">
-                  <i class="fa fa-phone"></i> {{ $store->phone }}<br>
-                  <i class="fa fa-whatsapp"></i> {{ $store->mobile }}
+                  <i class="fa fa-phone"></i> {{ $landing->store->phone }}<br>
+                  <i class="fa fa-whatsapp"></i> {{ $landing->store->mobile }}
                 </p>
                 <h5>O escribenos a:</h5>
                 <p class="card-text">
-                  <i class="fa fa-envelope"></i> {{ $store->email }}
+                  <i class="fa fa-envelope"></i> {{ $landing->store->email }}
                 </p>
               </div>
               <div class="col-sm-6 text-center">
-                <a href="https://api.whatsapp.com/send?phone={{ $store->mobile }}" class="btn btn-lg btn-success">Escribenos por Whatsapp <i class="fa fa-whatsapp"></i></a>
+                <a href="https://api.whatsapp.com/send?phone={{ $landing->store->mobile }}" class="btn btn-lg btn-success">Escribenos por Whatsapp <i class="fa fa-whatsapp"></i></a>
               </div>
             </div>
 
@@ -79,14 +79,14 @@
           <div class="tab-pane bg-light p-3 fade" id="location" role="tabpanel" aria-labelledby="location-tab">
             <div class="row">
               <div class="col-sm-6">
-                <h5>Visitanos en la ciudad de {{ $store->city }}: </h5>
+                <h5>Visitanos en la ciudad de {{ $landing->store->city }}: </h5>
                 <p class="card-text">
-                  <i class="fa fa-map-marker"></i> {{ $store->address }}<br>
-                  <i class="fa fa-clock-o"></i> Horario: {{ $store->schedule }}
+                  <i class="fa fa-map-marker"></i> {{ $landing->store->address }}<br>
+                  <i class="fa fa-clock-o"></i> Horario: {{ $landing->store->schedule }}
                 </p>
               </div>
               <div class="col-sm-6 text-center">
-                <a href="https://www.google.com/maps/?q={{ $store->lat }},{{ $store->lng }}" target="_blank" class="btn btn-lg btn-warning">¿Como llegar? <i class="fa fa-location-arrow"></i></a>
+                <a href="https://www.google.com/maps/?q={{ $landing->store->lat }},{{ $landing->store->lng }}" target="_blank" class="btn btn-lg btn-warning">¿Como llegar? <i class="fa fa-location-arrow"></i></a>
               </div>
             </div>
           </div>
@@ -96,18 +96,18 @@
   </div>
 </div>
 
-@if(Auth::check() && Auth::user()->id == $store->user_id)
+@if(Auth::check() && Auth::user()->id == $landing->store->user_id)
 <div class="container">
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="/{{ $store->slug }}">Portada</a>
+  <a class="navbar-brand" href="/{{ $landing->store->slug }}">Portada</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarText">
     <ul class="navbar-nav mr-auto">
-      <a href="/{{ $store->slug }}/edit" class="nav-link"><i class="fa fa-edit"></i> Editar</a>
-      <a href="/{{ $store->slug }}/landings/" class="nav-link"><i class="fa fa-paper-plane"></i> Landings <span class="badge badge-secondary">{{ $store->landings->count() }}</i></a>
-      <a href="/dashboard/stores/{{ $store->id }}/edit" class="nav-link"><i class="fa fa-comments-o"></i> Chats <span class="badge badge-secondary">{{ $store->records->count() }}</i></a>
+      <a href="/{{ $landing->store->slug }}/edit" class="nav-link"><i class="fa fa-edit"></i> Editar</a>
+      <a href="/{{ $landing->store->slug }}/landings/" class="nav-link"><i class="fa fa-paper-plane"></i> Landings <span class="badge badge-secondary">{{ $landing->store->landings->count() }}</i></a>
+      <a href="/dashboard/stores/{{ $landing->store->id }}/edit" class="nav-link"><i class="fa fa-comments-o"></i> Chats <span class="badge badge-secondary">{{ $landing->store->records->count() }}</i></a>
     </ul>
     <span class="navbar-text">
       Este es tu panel de administración

@@ -47,7 +47,14 @@ Route::post('/chats/{record_id}', 'ChatController@send')->where('record_id', '[0
 //records
 Route::post('/record', 'RecordController@store');
 
+Route::get('/migrar', 'WebController@migrar');
 
+
+//landings crud
+Route::get('{slug}/landings', 'LandingController@index')->where('slug', '[a-z,0-9-]+')->middleware('auth');
+Route::post('{slug}/landings', 'LandingController@store')->where('slug', '[a-z,0-9-]+')->middleware('auth');
+Route::get('{slug}/landings/{id}/edit', 'LandingController@edit')->where('slug', '[a-z,0-9-]+')->middleware('auth');
+Route::post('{slug}/landings/{id}/update', 'LandingController@update')->where('slug', '[a-z,0-9-]+')->middleware('auth');
 
 //Stores y landings
 Route::get('/buscar', 'StoreController@index');
@@ -55,7 +62,5 @@ Route::get('/stores/create', 'StoreController@create')->middleware('auth');
 Route::post('/stores', 'StoreController@store')->middleware('auth');
 Route::get('{slug}/edit', 'StoreController@edit')->where('slug', '[a-z,0-9-]+');
 Route::post('{slug}/update', 'StoreController@update')->where('slug', '[a-z,0-9-]+');
-Route::get('{slug}/landings', 'LandingController@index')->where('slug', '[a-z,0-9-]+');
-Route::post('{slug}/landings/update', 'LandingController@update')->where('slug', '[a-z,0-9-]+');
 Route::get('{store}/{slug}', 'LandingController@show')->where('store', '[a-z,0-9-]+')->where('slug', '[a-z,0-9-]+');
 Route::get('{slug}', 'StoreController@show')->where('slug', '[a-z,0-9-]+');

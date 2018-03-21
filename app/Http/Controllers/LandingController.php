@@ -19,109 +19,97 @@ class LandingController extends Controller
 
     return view('landings.index', compact('store'));
   }
-  public function create() {
-    return view('stores.create');
-  }
-  public function store(Request $request) {
+  public function store($slug, Request $request) {
+
     $this->validate(request(), [
         'name' => ['required', 'min:10', 'max:100']
     ]);
 
-    $store = new Store;
-    $store->user_id = Auth::user()->id;
-    $store->name = $request->name;
-    //Validar unico slug
-    $slug = str_slug($request->name);
-    $validate = Store::where('slug', $slug)->get();
-    if(count($validate) > 0) {
-        $slug = $slug . '-' . count($validate);
+    $store = Store::where('slug', $slug)->where('user_id', Auth::user()->id)->first();
+    if(!$store) {
+      flash('No tienes acceso a este contenido.')->error();
+      return redirect('/');
     }
-    $store->slug = $slug;
-    $store->category = $request->category;
-    $store->email = $request->email;
-    $store->city = $request->city;
-    $store->address = $request->address;
-    $store->lat = $request->lat;
-    $store->lng = $request->lng;
-    $store->phone = $request->phone;
-    $store->mobile = $request->mobile;
-    $store->schedule	 = $request->schedule	;
-    $store->description = $request->description;
-    $store->save();
 
-    flash('Tu nuevo comercio ha sido creado, ahora puedes agregar toda la información en el.')->success();
-    return redirect()->action('StoreController@show', $store->slug);
+    $landing = new Landing;
+    $landing->store_id = $store->id;
+    //Validar unico slug
+    $landingSlug = str_slug($request->name);
+    $validate = Landing::where('slug', $landingSlug)->get();
+    if(count($validate) > 0) {
+        $landingSlug = $landingSlug . '-' . count($validate);
+    }
+    $landing->slug = $landingSlug;
+    $landing->name = $request->name;
+    $landing->save();
+
+    flash('El nuevo landing de tu producto/servicio ha sido creado.')->success();
+    return redirect()->action('LandingController@index', $store->slug);
   }
-  public function show($slug)
+  public function show($store, $slug)
   {
-    $store = Store::where('slug', $slug)->first();
+    $store = Store::where('slug', $store)->first();
+    $landing = Landing::where('slug', $slug)->where('store_id', $store->id)->first();
     $record = $this->getRecord($store->id);
-    $store->views += 1;
-    $store->save();
+    $landing->views += 1;
+    $landing->save();
 
-    return view('stores.show', compact('store', 'record'));
+    return view('landings.show', compact('landing', 'record'));
   }
 
-  public function edit($slug) {
-      $store = Store::where('slug', $slug)->first();
-      return view('stores.edit', compact('store'));
+  public function edit($slug, $id) {
+    $store = Store::where('slug', $slug)->where('user_id', Auth::user()->id)->first();
+    if(!$store) {
+      flash('No tienes acceso a este contenido.')->error();
+      return redirect('/');
+    }
+    $landing = Landing::where('id', $id)->where('store_id', $store->id)->first();
+    return view('landings.edit', compact('landing'));
   }
 
-  public function update($slug, Request $request) {
+  public function update($slug, $id, Request $request) {
+    $store = Store::where('slug', $slug)->where('user_id', Auth::user()->id)->first();
+    if(!$store) {
+      flash('No tienes acceso a este contenido.')->error();
+      return redirect('/');
+    }
 
-      $store = Store::where('slug', $slug)->first();
+    $landing = Landing::where('id', $id)->where('store_id', $store->id)->first();
 
-      $this->validate(request(), [
-          'name' => ['required', 'min:10', 'max:200'],
-          'description' => ['required', 'min:50', 'max:250'],
-          'logo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:500',
-          'cover' => 'image|mimes:jpeg,png,jpg,gif,svg|max:500',
-      ]);
-      //restore trashed item
-      if($request->untrash) {
-          $store->restore();
-      }
+    $this->validate(request(), [
+        'name' => ['required', 'min:10', 'max:200'],
+        'description' => ['required', 'min:50', 'max:250'],
+        'picture' => 'image|mimes:jpeg,png,jpg,gif,svg|max:500',
+        'cover' => 'image|mimes:jpeg,png,jpg,gif,svg|max:500',
+    ]);
 
-      $store->name = $request->name;
-      $store->category = $request->category;
-      $store->email = $request->email;
-      $store->city = $request->city;
-      $store->address = $request->address;
-      $store->lat = $request->lat;
-      $store->lng = $request->lng;
-      $store->phone = $request->phone;
-      $store->mobile = $request->mobile;
-      $store->schedule = $request->schedule;
-      $store->facebook = $request->facebook;
-      $store->twitter = $request->twitter;
-      $store->tags = $request->tags;
-      $store->description = $request->description;
-      $store->content = $request->content;
-      $store->metakeywords = $request->metakeywords;
-      $store->metadescription = $request->metadescription;
-      $store->colorset = $request->colorset;
+    $landing->name = $request->name;
+    $landing->description = $request->description;
+    $landing->content = $request->content;
+    $landing->metakeywords = $request->metakeywords;
+    $landing->metadescription = $request->metadescription;
 
-      //upload logo
-      if($request->hasFile('logo') && $request->file('logo')->isValid()) {
-        $file = $request->file('logo');
-        $img = Image::make($file)->fit(300)->encode();
-        $name = $store->slug.'-logo.'.$file->getClientOriginalExtension();
-        Storage::disk('public')->put($name, $img);
-        $store->logo = '/storage/'.$name;
-      }
-      //upload cover
-      if($request->hasFile('cover') && $request->file('cover')->isValid()) {
-        $file = $request->file('cover');
-        $img = Image::make($file)->fit(1200,600)->encode();
-        $name = $store->slug.'-cover.'.$file->getClientOriginalExtension();
-        Storage::disk('public')->put($name, $img);
-        $store->cover = '/storage/'.$name;
-      }
+    //upload picture
+    if($request->hasFile('picture') && $request->file('picture')->isValid()) {
+      $file = $request->file('picture');
+      $img = Image::make($file)->fit(300)->encode();
+      $name = $landing->slug.'-picture.'.$file->getClientOriginalExtension();
+      Storage::disk('public')->put($name, $img);
+      $landing->picture = '/storage/'.$name;
+    }
+    //upload cover
+    if($request->hasFile('cover') && $request->file('cover')->isValid()) {
+      $file = $request->file('cover');
+      $img = Image::make($file)->fit(1200,600)->encode();
+      $name = $landing->slug.'-cover.'.$file->getClientOriginalExtension();
+      Storage::disk('public')->put($name, $img);
+      $landing->cover = '/storage/'.$name;
+    }
 
-      $store->save();
+    $landing->save();
 
-      flash('Tus cambios han sido guardados.')->success();
-      return redirect()->action('StoreController@show', $store->slug);
+    flash('Tus cambios han sido guardados.')->success();
+    return redirect()->action('LandingController@index', $landing->store->slug);
   }
   public function destroy($id) {
       if(!$this->hasrole('Admin')) { return redirect('/'); }
