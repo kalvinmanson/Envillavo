@@ -12,7 +12,9 @@
 
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
-
+    <script async custom-element="amp-auto-ads"
+      src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
 </head>
 <body>
   <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -43,7 +45,11 @@
      fjs.parentNode.insertBefore(js, fjs);
    }(document, 'script', 'facebook-jssdk'));
 </script>
+<amp-auto-ads type="adsense"
+  data-ad-client="ca-pub-3524399464499863">
+</amp-auto-ads>
   <div id="app">
+
     @include('partials.menu')
     <div class="container">
         @include('flash::message')
