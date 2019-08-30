@@ -19,17 +19,17 @@
       </div>
     </form>
 
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <!-- Parking -->
-<ins class="adsbygoogle"
-     style="display:block"
+<amp-ad width="100vw" height=320
+     type="adsense"
      data-ad-client="ca-pub-3524399464499863"
      data-ad-slot="5369653209"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
+     data-auto-format="rspv"
+     data-full-width>
+  <div overflow></div>
+</amp-ad>
+
+
   </div>
 </div>
 @endsection
