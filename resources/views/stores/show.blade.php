@@ -22,6 +22,17 @@
 
       <div class="row">
         <div class="col-sm-8">
+          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+          <!-- Parking -->
+          <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-client="ca-pub-3524399464499863"
+               data-ad-slot="5369653209"
+               data-ad-format="auto"
+               data-full-width-responsive="true"></ins>
+          <script>
+               (adsbygoogle = window.adsbygoogle || []).push({});
+          </script>
           {!! $store->content !!}
         </div>
         <div class="col-sm-4">
